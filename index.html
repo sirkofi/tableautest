@@ -14,7 +14,7 @@
     <button id="logout" onclick="logout()" style="display:none;">Logout</button>
 
     <div id="dashboard-container" style="display:none;">
-        <!-- Updated Tableau Embed -->
+        <!-- Tableau Embed -->
         <tableau-viz id="tableauViz"
             src="https://10ay.online.tableau.com/t/forsightanalytics-c7b8da01a7/views/EmailPerformancebyCampaign/EmailPerformancebyCampaign"
             token=""
@@ -48,16 +48,16 @@
         function handleAuthCallback() {
             auth0Client.parseHash((err, authResult) => {
                 if (authResult && authResult.accessToken) {
-                    localStorage.setItem("id_token", authResult.idToken);
+                    console.log("JWT Token:", authResult.accessToken); // ✅ Debugging
                     localStorage.setItem("access_token", authResult.accessToken);
-                    
+
                     document.getElementById("login").style.display = "none";
                     document.getElementById("logout").style.display = "block";
                     document.getElementById("dashboard-container").style.display = "block";
 
-                    // Set JWT Token in Tableau Embed
+                    // ✅ Pass JWT to Tableau Viz
                     document.getElementById("tableauViz").setAttribute("token", authResult.accessToken);
-                } else if (err) {
+                } else {
                     console.log("Error:", err);
                 }
             });
