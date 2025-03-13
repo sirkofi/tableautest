@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tableau Embedded Dashboard</title>
+    <script src="https://cdn.auth0.com/js/auth0/9.19/auth0.min.js"></script>
+    <script type="module" src="https://embedding.tableauusercontent.com/tableau.embedding.3.1.0.min.js"></script>
+</head>
+<body>
+    <h2>Tableau Embedded Dashboard</h2>
+    
+    <button id="login" onclick="login()">Login</button>
+    <button id="logout" onclick="logout()" style="display:none;">Logout</button>
+
+    <div id="dashboard-container" style="display:none;">
+        <!-- Updated Tableau Embed -->
+        <tableau-viz id="tableauViz"
+            src="https://10ay.online.tableau.com/t/forsightanalytics-c7b8da01a7/views/EmailPerformancebyCampaign/EmailPerformancebyCampaign"
+            token=""
+            hide-tabs
+            hide-toolbar>
+        </tableau-viz>
+    </div>
+
+    <script>
+        const auth0Client = new auth0.WebAuth({
+            domain: "dev-ltdreu8c7zz8icui.us.auth0.com",
+            clientID: "YpejSZ0X3CvSIkxOQIDHMa2HQ1rpaUdy",
+            redirectUri: "https://kofiokine.github.io/Projects/",
+            responseType: "token id_token",
+            scope: "openid profile email"
+        });
+
+        function login() {
+            auth0Client.authorize();
+        }
+
+        function logout() {
+            localStorage.removeItem("id_token");
+            localStorage.removeItem("access_token");
+            document.getElementById("login").style.display = "block";
+            document.getElementById("logout").style.display = "none";
+            document.getElementById("dashboard-container").style.display = "none";
+            auth0Client.logout({ returnTo: "https://kofiokine.github.io/Projects/" });
+        }
+
+        function handleAuthCallback() {
+            auth0Client.parseHash((err, authResult) => {
+                if (authResult && authResult.accessToken) {
+                    localStorage.setItem("id_token", authResult.idToken);
+                    localStorage.setItem("access_token", authResult.accessToken);
+                    
+                    document.getElementById("login").style.display = "none";
+                    document.getElementById("logout").style.display = "block";
+                    document.getElementById("dashboard-container").style.display = "block";
+
+                    // Set JWT Token in Tableau Embed
+                    document.getElementById("tableauViz").setAttribute("token", authResult.accessToken);
+                } else if (err) {
+                    console.log("Error:", err);
+                }
+            });
+        }
+
+        window.onload = function () {
+            if (window.location.hash.includes("access_token")) {
+                handleAuthCallback();
+            }
+        };
+    </script>
+</body>
+</html>
