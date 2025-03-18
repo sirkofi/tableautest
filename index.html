@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Tableau Embedded Dashboard</title>
-    <script type="module" src="https://prod-apsoutheast-a.online.tableau.com/javascripts/api/tableau.embedding.3.latest.min.js"></script>
+    <script type="module" src="https://10ay.online.tableau.com/javascripts/api/tableau.embedding.3.latest.min.js"></script>
 </head>
 <body>
     <h2>Tableau Embedded Dashboard</h2>
@@ -12,23 +12,22 @@
     <tableau-viz 
         id="tableauViz"
         src="https://10ay.online.tableau.com/t/forsightanalytics-c7b8da01a7/views/EmailPerformancebyCampaign/EmailPerformancebyCampaign"
-        width="1200"
-        height="840"
+        width="1912"
+        height="914"
         hide-tabs
         toolbar="bottom"
-        connected-app-id="092af284-53ca-4093-a10d-2110ad665b13">
+        connected-app-id="47020635-fb8d-4f18-8a48-7e8741557511">
     </tableau-viz>
 
     <script>
-    document.addEventListener("DOMContentLoaded", async function() {
+    document.addEventListener("DOMContentLoaded", function() {
         const tableauViz = document.getElementById('tableauViz');
 
-        // ✅ Use a valid JWT token (replace with your actual JWT)
-        const token = "eyJhbGciOiJIUzI1NiIsImlzcyI6ImM0ZDQ1OTJmLWJiYmItNGE2MC1iNGY1LTU0NmYwN2IyOWNkMCIsImtpZCI6ImE5MjcwYzg4LWFhMGItNGNmOS1hZGFhLWY3MWZmYTk4NTIyYyIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJjNGQ0NTkyZi1iYmJiLTRhNjAtYjRmNS01NDZmMDdiMjljZDAiLCJleHAiOjE3NDIzMzk4NDksImp0aSI6ImUyM2QxMjY1LTBhZGUtNGViOS05MTk1LWVkYzQ0YTIzNjIxMCIsImF1ZCI6InRhYmxlYXUiLCJzdWIiOiJmb3JzaWdodGFuYWx5dGljc0BnbWFpbC5jb20iLCJzY3AiOlsidGFibGVhdTp2aWV3czplbWJlZCIsInRhYmxlYXU6dmlld3M6ZW1iZWRfYXV0aG9yaW5nIiwidGFibGVhdTppbnNpZ2h0czplbWJlZCJdfQ.444_UHOcLYeEJsqoAlgfjzlMg_K4kztdvmOu8EUtLhU";
-        
+        // ✅ Replace this with your valid JWT token
+        const token = "eyJhbGciOiJIUzI1NiIsImlzcyI6ImM0ZDQ1OTJmLWJiYmItNGE2MC1iNGY1LTU0NmYwN2IyOWNkMCIsImtpZCI6ImE5MjcwYzg4LWFhMGItNGNmOS1hZGFhLWY3MWZmYTk4NTIyYyIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJjNGQ0NTkyZi1iYmJiLTRhNjAtYjRmNS01NDZmMDdiMjljZDAiLCJleHAiOjE3NDIzNDIyMTMsImp0aSI6IjY0YzM3OTVlLTg1YzctNDkyYS1iN2RmLTJlNDcxMTE5ZTAxYSIsImF1ZCI6InRhYmxlYXUiLCJzdWIiOiJmb3JzaWdodGFuYWx5dGljc0BnbWFpbC5jb20iLCJzY3AiOlsidGFibGVhdTp2aWV3czplbWJlZCIsInRhYmxlYXU6dmlld3M6ZW1iZWRfYXV0aG9yaW5nIiwidGFibGVhdTppbnNpZ2h0czplbWJlZCJdfQ.8sW0jC0CzU2WJyOBg4C3SAeGTSEsCUtV1U20ia0GLTw"; // Ensure this is a fresh, valid JWT
+
         // ✅ Assign the token dynamically to the component
         tableauViz.token = token;
-
         console.log("🔑 JWT Assigned:", tableauViz.token);
 
         tableauViz.addEventListener("vizLoadError", (e) => {
@@ -39,8 +38,10 @@
             console.log("✅ Tableau Viz Loaded Successfully!");
         });
 
-        // ✅ Debugging Step: Check if token is applied
-        console.log("✅ Current Token in DOM:", document.getElementById('tableauViz').token);
+        // ✅ Debugging Step: Check if the token is applied correctly
+        setTimeout(() => {
+            console.log("🔎 Current Token in DOM:", tableauViz.token);
+        }, 1000);
     });
     </script>
 
@@ -50,7 +51,7 @@
             border: none;
         }
         tableau-viz {
-            min-height: 840px;
+            min-height: 914px;
             width: 100%;
         }
     </style>
