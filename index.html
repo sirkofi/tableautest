@@ -16,21 +16,31 @@
         height="840"
         hide-tabs
         toolbar="bottom"
-        connected-app-id="092af284-53ca-4093-a10d-2110ad665b13"
-        token="eyJhbGciOiJIUzI1NiIsImlzcyI6ImM0ZDQ1OTJmLWJiYmItNGE2MC1iNGY1LTU0NmYwN2IyOWNkMCIsImtpZCI6ImE5MjcwYzg4LWFhMGItNGNmOS1hZGFhLWY3MWZmYTk4NTIyYyIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJjNGQ0NTkyZi1iYmJiLTRhNjAtYjRmNS01NDZmMDdiMjljZDAiLCJleHAiOjE3NDIzMzkzODgsImp0aSI6IjBiMjFmNjE3LTJiNWItNDA2ZC1iNTcwLTk0ZTQxNjk4ZWViMiIsImF1ZCI6InRhYmxlYXUiLCJzdWIiOiJmb3JzaWdodGFuYWx5dGljc0BnbWFpbC5jb20iLCJzY3AiOlsidGFibGVhdTp2aWV3czplbWJlZCIsInRhYmxlYXU6dmlld3M6ZW1iZWRfYXV0aG9yaW5nIiwidGFibGVhdTppbnNpZ2h0czplbWJlZCJdfQ.r6mCUHpvNilfUDfTnykrtFKb8-3mQcnNYUxdcnc-RVs">
+        connected-app-id="092af284-53ca-4093-a10d-2110ad665b13">
     </tableau-viz>
 
     <script>
-    document.addEventListener("DOMContentLoaded", function() {
+    document.addEventListener("DOMContentLoaded", async function() {
         const tableauViz = document.getElementById('tableauViz');
+
+        // ✅ Use a valid JWT token (replace with your actual JWT)
+        const token = "eyJhbGciOiJIUzI1NiIsImlzcyI6ImM0ZDQ1OTJmLWJiYmItNGE2MC1iNGY1LTU0NmYwN2IyOWNkMCIsImtpZCI6ImE5MjcwYzg4LWFhMGItNGNmOS1hZGFhLWY3MWZmYTk4NTIyYyIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJjNGQ0NTkyZi1iYmJiLTRhNjAtYjRmNS01NDZmMDdiMjljZDAiLCJleHAiOjE3NDIzMzk4NDksImp0aSI6ImUyM2QxMjY1LTBhZGUtNGViOS05MTk1LWVkYzQ0YTIzNjIxMCIsImF1ZCI6InRhYmxlYXUiLCJzdWIiOiJmb3JzaWdodGFuYWx5dGljc0BnbWFpbC5jb20iLCJzY3AiOlsidGFibGVhdTp2aWV3czplbWJlZCIsInRhYmxlYXU6dmlld3M6ZW1iZWRfYXV0aG9yaW5nIiwidGFibGVhdTppbnNpZ2h0czplbWJlZCJdfQ.444_UHOcLYeEJsqoAlgfjzlMg_K4kztdvmOu8EUtLhU";
+        
+        // ✅ Assign the token dynamically to the component
+        tableauViz.token = token;
+
+        console.log("🔑 JWT Assigned:", tableauViz.token);
 
         tableauViz.addEventListener("vizLoadError", (e) => {
             console.error("❌ Tableau Viz Load Error:", e.detail);
         });
 
         tableauViz.addEventListener("firstInteractive", function() {
-            console.log("✅ Tableau Viz is interactive!");
+            console.log("✅ Tableau Viz Loaded Successfully!");
         });
+
+        // ✅ Debugging Step: Check if token is applied
+        console.log("✅ Current Token in DOM:", document.getElementById('tableauViz').token);
     });
     </script>
 
