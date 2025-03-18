@@ -16,33 +16,25 @@
         height="840"
         hide-tabs
         toolbar="bottom"
-        iframe-auth
-        connected-app-id="092af284-53ca-4093-a10d-2110ad665b13">
+        connected-app-id="092af284-53ca-4093-a10d-2110ad665b13"
+        token="eyJhbGciOiJIUzI1NiIsImlzcyI6ImM0ZDQ1OTJmLWJiYmItNGE2MC1iNGY1LTU0NmYwN2IyOWNkMCIsImtpZCI6ImE5MjcwYzg4LWFhMGItNGNmOS1hZGFhLWY3MWZmYTk4NTIyYyIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJjNGQ0NTkyZi1iYmJiLTRhNjAtYjRmNS01NDZmMDdiMjljZDAiLCJleHAiOjE3NDIzMzkzODgsImp0aSI6IjBiMjFmNjE3LTJiNWItNDA2ZC1iNTcwLTk0ZTQxNjk4ZWViMiIsImF1ZCI6InRhYmxlYXUiLCJzdWIiOiJmb3JzaWdodGFuYWx5dGljc0BnbWFpbC5jb20iLCJzY3AiOlsidGFibGVhdTp2aWV3czplbWJlZCIsInRhYmxlYXU6dmlld3M6ZW1iZWRfYXV0aG9yaW5nIiwidGFibGVhdTppbnNpZ2h0czplbWJlZCJdfQ.r6mCUHpvNilfUDfTnykrtFKb8-3mQcnNYUxdcnc-RVs">
     </tableau-viz>
 
     <script>
     document.addEventListener("DOMContentLoaded", function() {
         const tableauViz = document.getElementById('tableauViz');
 
-        console.log("🚀 Attempting to load Tableau Viz...");
-
         tableauViz.addEventListener("vizLoadError", (e) => {
             console.error("❌ Tableau Viz Load Error:", e.detail);
-            e.target.iframeAuth = true;  // Ensures authentication happens inside the iframe
         });
 
         tableauViz.addEventListener("firstInteractive", function() {
-            console.log("✅ Tableau Viz Loaded Successfully!");
-        });
-
-        tableauViz.addEventListener("message", function(event) {
-            console.log("📩 Tableau Event:", event.data);
+            console.log("✅ Tableau Viz is interactive!");
         });
     });
     </script>
 
     <style>
-        /* Hides the Tableau login button if it still appears */
         iframe {
             display: block;
             border: none;
