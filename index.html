@@ -4,67 +4,38 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Tableau Embedded Dashboard</title>
-    <script src="https://cdn.auth0.com/js/auth0/9.19/auth0.min.js"></script>
-    <script type="module" src="https://embedding.tableauusercontent.com/tableau.embedding.3.1.0.min.js"></script>
+    <script type="module" src="https://prod-apsoutheast-a.online.tableau.com/javascripts/api/tableau.embedding.3.latest.min.js"></script>
 </head>
 <body>
     <h2>Tableau Embedded Dashboard</h2>
-    
-    <button id="login" onclick="login()">Login</button>
-    <button id="logout" onclick="logout()" style="display:none;">Logout</button>
 
-    <div id="dashboard-container" style="display:none;">
-        <tableau-viz id="tableauViz"
-            src="https://10ay.online.tableau.com/t/forsightanalytics-c7b8da01a7/views/EmailPerformancebyCampaign/EmailPerformancebyCampaign"
-            token=""
-            hide-tabs
-            hide-toolbar>
-        </tableau-viz>
-    </div>
+    <tableau-viz 
+        id="tableauViz"
+        src="https://prod-apsoutheast-a.online.tableau.com/t/forsightanalytics-c7b8da01a7/views/EmailPerformancebyCampaign/EmailPerformancebyCampaign"
+        width="1200"
+        height="840"
+        hide-tabs
+        toolbar="bottom"
+        iframe-auth
+        connected-app-id="092af284-53ca-4093-a10d-2110ad665b13">
+    </tableau-viz>
 
     <script>
-        const auth0Client = new auth0.WebAuth({
-            domain: "dev-ltdreu8c7zz8icui.us.auth0.com",
-            clientID: "YpejSZ0X3CvSIkxOQIDHMa2HQ1rpaUdy",
-            redirectUri: "https://kofiokine.github.io/Projects/",
-            responseType: "token id_token",
-            scope: "openid profile email"
+    document.addEventListener("DOMContentLoaded", function() {
+        const tableauViz = document.getElementById('tableauViz');
+        
+        console.log("🚀 Attempting to load Tableau Viz...");
+
+        tableauViz.addEventListener("vizLoadError", (e) => {
+            console.error("❌ Tableau Viz Load Error:", e.detail);
+            e.target.iframeAuth = true;  // Attempt to force iframe authentication
         });
 
-        function login() {
-            auth0Client.authorize();
-        }
-
-        function logout() {
-            localStorage.removeItem("id_token");
-            localStorage.removeItem("access_token");
-            document.getElementById("login").style.display = "block";
-            document.getElementById("logout").style.display = "none";
-            document.getElementById("dashboard-container").style.display = "none";
-            auth0Client.logout({ returnTo: "https://kofiokine.github.io/Projects/" });
-        }
-
-        function handleAuthCallback() {
-            auth0Client.parseHash((err, authResult) => {
-                if (authResult && authResult.accessToken) {
-                    console.log("JWT Token:", authResult.accessToken); 
-                    localStorage.setItem("access_token", authResult.accessToken);
-
-                    document.getElementById("login").style.display = "none";
-                    document.getElementById("logout").style.display = "block";
-                    document.getElementById("dashboard-container").style.display = "block";
-                    document.getElementById("tableauViz").setAttribute("token", authResult.accessToken);
-                } else {
-                    console.log("Error:", err);
-                }
-            });
-        }
-
-        window.onload = function () {
-            if (window.location.hash.includes("access_token")) {
-                handleAuthCallback();
-            }
-        };
+        tableauViz.addEventListener("firstInteractive", function() {
+            console.log("✅ Tableau Viz Loaded Successfully!");
+        });
+    });
     </script>
+
 </body>
 </html>
