@@ -1,5 +1,12 @@
-<!-- Load the Tableau Embedding API -->
-<script src="https://10ay.online.tableau.com/javascripts/api/tableau.embedding.3.latest.min.js" type="module" async defer></script>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Tableau Embed Test</title>
+</head>
+<body>
+<h1>Tableau Dashboard Test</h1>
 
 
 
@@ -13,41 +20,53 @@ toolbar="hidden">
 
 
 
-<!-- JavaScript to Initialize the Viz with JWT -->
+<!-- Load Tableau Embedding API -->
+<script src="https://10ay.online.tableau.com/javascripts/api/tableau.embedding.3.1.0.min.js" type="text/javascript" async defer onload="onTableauScriptLoad()" onerror="onTableauScriptError()"></script>
+
+
+
+<!-- Initialize the Viz -->
 <script type="text/javascript">
+function onTableauScriptLoad() {
+console.log("Tableau API script loaded successfully!");
+initializeViz();
+}
+
+
+
+function onTableauScriptError() {
+console.error("Failed to load Tableau API script. Check URL or network.");
+}
+
+
+
 function initializeViz() {
-// Check if tableau is defined
+try {
 if (typeof tableau === "undefined") {
-console.error("Tableau API not loaded yet. Retrying in 1 second...");
-setTimeout(initializeViz, 1000); // Retry after 1 second
+console.error("Tableau object not defined!");
 return;
 }
-
-
-
+console.log("Tableau object available:", tableau);
 const vizElement = document.getElementById("tableauViz");
-const vizOptions = {
-hideTabs: true,
-onFirstInteractive: () => {
-console.log("Tableau Viz is interactive!");
-}
-};
-
-
-
-// Initialize the viz with the token
 const viz = new tableau.Viz(vizElement, vizElement.src, {
-...vizOptions,
+hideTabs: true,
 auth: {
-jwt: "eyJhbGciOiJIUzI1NiIsImtpZCI6ImE5MjcwYzg4LWFhMGItNGNmOS1hZGFhLWY3MWZmYTk4NTIyYyIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJjNGQ0NTkyZi1iYmJiLTRhNjAtYjRmNS01NDZmMDdiMjljZDAiLCJleHAiOjE3NDIzOTE5MTYsImp0aSI6IjRiN2Q1MDFiLTBlMjctNGRmNS05ZWY0LWRhNmI4MjBmZDIyZSIsImF1ZCI6InRhYmxlYXUiLCJzdWIiOiJmb3JzaWdodGFuYWx5dGljc0BnbWFpbC5jb20iLCJzY3AiOlsidGFibGVhdTp2aWV3czplbWJlZCJdfQ.Ec9122Ot_xK8BnsjQnN-gi8i4Ppf2dCvvUS-hJ0DPFY"
-}
+jwt: "eyJhbGciOiJIUzI1NiIsImtpZCI6ImE5MjcwYzg4LWFhMGItNGNmOS1hZGFhLWY3MWZmYTk4NTIyYyIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJjNGQ0NTkyZi1iYmJiLTRhNjAtYjRmNS01NDZmMDdiMjljZDAiLCJleHAiOjE3NDIzOTIzMTIsImp0aSI6IjZlMWEwYTY5LTBkNDMtNDQwMC1hMTVjLTUxMDE0NDQxMWZjNiIsImF1ZCI6InRhYmxlYXUiLCJzdWIiOiJmb3JzaWdodGFuYWx5dGljc0BnbWFpbC5jb20iLCJzY3AiOlsidGFibGVhdTp2aWV3czplbWJlZCJdfQ.bg2goIcF26hx-BD2Nwm7BieQz0yl20t4-Ols2dc71_k" // Replace with a fresh, valid JWT
+},
+onFirstInteractive: () => console.log("Viz is interactive!"),
+onError: (err) => console.error("Viz load error:", err)
 });
+} catch (e) {
+console.error("Error initializing viz:", e);
+}
 }
 
 
 
-// Run when DOM is ready and keep retrying if tableau isn’t loaded
+// Run after DOM is loaded
 document.addEventListener("DOMContentLoaded", function () {
-initializeViz();
+console.log("DOM loaded, waiting for Tableau script...");
 });
 </script>
+</body>
+</html>
