@@ -1,40 +1,49 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Tableau Dashboard Embed</title>
-    <script type="module" src="https://embedding.tableauusercontent.com/tableau.embedding.3.latest.min.js"></script>
-</head>
-<body>
-    <tableau-viz 
-        id="tableauViz"
-        src="https://10ay.online.tableau.com/t/forsightanalytics-c7b8da01a7/views/EmailPerformancebyCampaign/EmailPerformancebyCampaign"
-        iframe-auth>
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>My embedded Tableau visualization</title>
+    <style>
+      html, body, tableau-viz, tableau-authoring-viz, tableau-pulse {
+        height: 100%;
+        width: 100%;
+      }
+    </style>
+  </head>
+  <body>
+    <tableau-viz
+      src="https://10ay.online.tableau.com/t/forsightanalytics-c7b8da01a7/views/EmailPerformancebyCampaign/EmailPerformancebyCampaign"
+      device="desktop"
+      hide-tabs
+      toolbar="bottom"
+    >
     </tableau-viz>
+    <script type="module">
+      import { SheetType, TableauEventType } from 'https://10ay.online.tableau.com/javascripts/api/tableau.embedding.3.latest.js';
 
-    <script>
-        document.addEventListener("DOMContentLoaded", function() {
-            const tableauViz = document.getElementById('tableauViz');
+      (async () => {
+        const viz = document.querySelector('tableau-viz, tableau-authoring-viz');
 
-            // ✅ Ensure latest JWT is used
-            const token = "eyJhbGciOiJIUzI1NiIsImtpZCI6ImE5MjcwYzg4LWFhMGItNGNmOS1hZGFhLWY3MWZmYTk4NTIyYyIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJjNGQ0NTkyZi1iYmJiLTRhNjAtYjRmNS01NDZmMDdiMjljZDAiLCJleHAiOjE3NDIzNjk0MjYsImp0aSI6ImNlYWJjN2ZkLWY3MGYtNDUwZS05NzhkLThmZjRjMDllZGRmNiIsImF1ZCI6InRhYmxlYXUiLCJzdWIiOiJmb3JzaWdodGFuYWx5dGljc0BnbWFpbC5jb20iLCJzY3AiOlsidGFibGVhdTp2aWV3czplbWJlZCJdfQ.5bXFbfWsvNeYT7jNeJ9xA7dDsOs5EKMcYIhAEDKdRSU";  
-            
-            // ✅ Force token reset & reapply
-            tableauViz.removeAttribute("token");  
-            setTimeout(() => {
-                tableauViz.setAttribute("token", token);
-                console.log("✅ JWT Assigned:", tableauViz.getAttribute("token"));
-            }, 500);
+        // ✅ Manually assign a valid JWT (replace with an actual token)
+        viz.token = "eyJhbGciOiJIUzI1NiIsImtpZCI6ImE5MjcwYzg4LWFhMGItNGNmOS1hZGFhLWY3MWZmYTk4NTIyYyIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJjNGQ0NTkyZi1iYmJiLTRhNjAtYjRmNS01NDZmMDdiMjljZDAiLCJleHAiOjE3NDIzNzI1NDMsImp0aSI6IjAzMmQyYmRlLTkwN2YtNDZjOS04NGRhLWU3NTcxZjJiNGUyMCIsImF1ZCI6InRhYmxlYXUiLCJzdWIiOiJmb3JzaWdodGFuYWx5dGljc0BnbWFpbC5jb20iLCJzY3AiOlsidGFibGVhdTp2aWV3czplbWJlZCJdfQ.zHMv11OPJgjNUu-RvDIO3vdbpp5AzheIiOsitImuOVk"; 
 
-            tableauViz.addEventListener("vizLoadError", (e) => {
-                console.error("❌ Tableau Viz Load Error:", e.detail);
-            });
+        console.log("✅ Token Assigned:", viz.token);
 
-            tableauViz.addEventListener("firstInteractive", function() {
-                console.log("✅ Tableau Viz Loaded Successfully!");
-            });
+        // Wait for the viz to become interactive
+        await new Promise((resolve, reject) => {
+          viz.addEventListener(TableauEventType.FirstInteractive, () => {
+            console.log('✅ Viz is interactive!');
+            resolve();
+          });
+
+          viz.addEventListener(TableauEventType.VizLoadError, (error) => {
+            console.error('❌ Viz Load Error:', error);
+            reject(error);
+          });
         });
-    </script>
-</body>
+      })();
+    </script>  
+  </body>
 </html>
