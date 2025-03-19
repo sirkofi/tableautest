@@ -1,0 +1,53 @@
+<!-- Load the Tableau Embedding API -->
+<script src="https://10ay.online.tableau.com/javascripts/api/tableau.embedding.3.latest.min.js" type="text/javascript" async defer></script>
+
+
+
+<!-- Placeholder for the Tableau Viz -->
+<tableau-viz id="tableauViz"
+src="https://10ay.online.tableau.com/t/forsightanalytics-c7b8da01a7/views/EmailPerformancebyCampaign/EmailPerformancebyCampaign"
+width="100%"
+height="800"
+toolbar="hidden">
+</tableau-viz>
+
+
+
+<!-- JavaScript to Initialize the Viz with JWT -->
+<script type="text/javascript">
+function initializeViz() {
+// Check if tableau is defined
+if (typeof tableau === "undefined") {
+console.error("Tableau API not loaded yet. Retrying in 1 second...");
+setTimeout(initializeViz, 1000); // Retry after 1 second
+return;
+}
+
+
+
+const vizElement = document.getElementById("tableauViz");
+const vizOptions = {
+hideTabs: true,
+onFirstInteractive: () => {
+console.log("Tableau Viz is interactive!");
+}
+};
+
+
+
+// Initialize the viz with the token
+const viz = new tableau.Viz(vizElement, vizElement.src, {
+...vizOptions,
+auth: {
+jwt: "eyJhbGciOiJIUzI1NiIsImtpZCI6ImE5MjcwYzg4LWFhMGItNGNmOS1hZGFhLWY3MWZmYTk4NTIyYyIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJjNGQ0NTkyZi1iYmJiLTRhNjAtYjRmNS01NDZmMDdiMjljZDAiLCJleHAiOjE3NDIzOTA5OTQsImp0aSI6ImM4Mzk4OTMyLWNjM2EtNGQzNC1iMjdkLTg1MmE5M2UzNDI4NSIsImF1ZCI6InRhYmxlYXUiLCJzdWIiOiJmb3JzaWdodGFuYWx5dGljc0BnbWFpbC5jb20iLCJzY3AiOlsidGFibGVhdTp2aWV3czplbWJlZCJdfQ.e-2qojQ6JWqRY-bY0LFT1aTUXjMlq73we-amBOlf5Bs"
+}
+});
+}
+
+
+
+// Run when DOM is ready and keep retrying if tableau isn’t loaded
+document.addEventListener("DOMContentLoaded", function () {
+initializeViz();
+});
+</script>
