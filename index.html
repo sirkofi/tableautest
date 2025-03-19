@@ -27,7 +27,7 @@
             const viz = document.querySelector('tableau-viz');
 
             // ✅ Use the JWT exactly as in the Playground
-            viz.token = "eyJhbGciOiJIUzI1NiIsImlzcyI6ImM0ZDQ1OTJmLWJiYmItNGE2MC1iNGY1LTU0NmYwN2IyOWNkMCIsImtpZCI6ImE5MjcwYzg4LWFhMGItNGNmOS1hZGFhLWY3MWZhOTg1MjJjIiwidHlwIjoiSldUIn0.eyJpc3MiOiJjNGQ0NTkyZi1iYmJiLTRhNjAtYjRmNS01NDZmMDdiMjljZDAiLCJleHAiOjE3NDIzNTg1MjgsImp0aSI6ImNhMDQ5MzQzLTc3NWMtNDdlOC05YWFjLTAwN2IzODBkYjFmNCIsImF1ZCI6InRhYmxlYXUiLCJzdWIiOiJcdGZvcnNpZ2h0YW5hbHl0aWNzQGdtYWlsLmNvbSIsInNjcCI6WyJ0YWJsZWF1OnZpZXdzOmVtYmVkIiwidGFibGVhdTp2aWV3czplbWJlZF9hdXRob3JpbmciLCJ0YWJsZWF1Omluc2lnaHRzOmVtYmVkIl19.UoUxe8kjVr-iewxH2WcBdpyrzEkG6mDzIM1VxKwtya8";  // Replace with your real JWT
+            viz.token = "eyJhbGciOiJIUzI1NiIsImlzcyI6ImM0ZDQ1OTJmLWJiYmItNGE2MC1iNGY1LTU0NmYwN2IyOWNkMCIsImtpZCI6ImE5MjcwYzg4LWFhMGItNGNmOS1hZGFhLWY3MWZhOTg1MjJjIiwidHlwIjoiSldUIn0.eyJpc3MiOiJjNGQ0NTkyZi1iYmJiLTRhNjAtYjRmNS01NDZmMDdiMjljZDAiLCJleHAiOjE3NDIzNTg5MTUsImp0aSI6ImZmZjEzMThkLTVlNWItNDBkNS05MGUxLTI3YmQ4YTBkMzgyMiIsImF1ZCI6InRhYmxlYXUiLCJzdWIiOiJmb3JzaWdodGFuYWx5dGljc0BnbWFpbC5jb20iLCJzY3AiOlsidGFibGVhdTp2aWV3czplbWJlZCIsInRhYmxlYXU6dmlld3M6ZW1iZWRfYXV0aG9yaW5nIiwidGFibGVhdTppbnNpZ2h0czplbWJlZCJdfQ.EMo-JhWIrejO_QW0FA6dhs3DPWLvPkwVHT-uJmienXE";  // Replace with your real JWT
 
             await new Promise((resolve, reject) => {
                 viz.addEventListener(TableauEventType.FirstInteractive, () => {
