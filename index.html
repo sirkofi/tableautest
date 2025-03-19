@@ -8,31 +8,31 @@
 <body>
     <tableau-viz 
         id="tableauViz"
-        src="https://10ay.online.tableau.com/#/site/forsightanalytics-c7b8da01a7/views/EmailPerformancebyCampaign/EmailPerformancebyCampaign?:iid=1"
-        connected-app-id="c4d4592f-bbbb-4a60-b4f5-546f07b29cd0">
+        src="https://10ay.online.tableau.com/t/forsightanalytics-c7b8da01a7/views/EmailPerformancebyCampaign/EmailPerformancebyCampaign"
+        iframe-auth>
     </tableau-viz>
 
     <script>
         document.addEventListener("DOMContentLoaded", function() {
             const tableauViz = document.getElementById('tableauViz');
 
-            // Use the newly generated JWT
-            const token = "eyJhbGciOiJIUzI1NiIsImtpZCI6ImE5MjcwYzg4LWFhMGItNGNmOS1hZGFhLWY3MWZmYTk4NTIyYyIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJjNGQ0NTkyZi1iYmJiLTRhNjAtYjRmNS01NDZmMDdiMjljZDAiLCJleHAiOjE3NDIzNjg3NTUsImp0aSI6IjkyNDYwYThhLTA5ZjItNDRkNy1hNjMzLTI4NGQwOTQyYjk4NyIsImF1ZCI6InRhYmxlYXUiLCJzdWIiOiJmb3JzaWdodGFuYWx5dGljc0BnbWFpbC5jb20iLCJzY3AiOlsidGFibGVhdTp2aWV3czplbWJlZCJdfQ.K8L7m6NL0qKwCfE3eEeJmr88f6hWdfl-0IH4jWBpalA"; 
-            tableauViz.token = token;  // Assign JWT dynamically
+            // ✅ Assign JWT **before rendering**
+            const token = "eyJhbGciOiJIUzI1NiIsImtpZCI6ImE5MjcwYzg4LWFhMGItNGNmOS1hZGFhLWY3MWZmYTk4NTIyYyIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJjNGQ0NTkyZi1iYmJiLTRhNjAtYjRmNS01NDZmMDdiMjljZDAiLCJleHAiOjE3NDIzNjk0MjYsImp0aSI6ImNlYWJjN2ZkLWY3MGYtNDUwZS05NzhkLThmZjRjMDllZGRmNiIsImF1ZCI6InRhYmxlYXUiLCJzdWIiOiJmb3JzaWdodGFuYWx5dGljc0BnbWFpbC5jb20iLCJzY3AiOlsidGFibGVhdTp2aWV3czplbWJlZCJdfQ.5bXFbfWsvNeYT7jNeJ9xA7dDsOs5EKMcYIhAEDKdRSU";  
+            tableauViz.setAttribute("token", token);  
 
-            console.log("JWT Assigned:", tableauViz.token);
+            console.log("✅ JWT Assigned:", tableauViz.getAttribute("token"));
 
             tableauViz.addEventListener("vizLoadError", (e) => {
-                console.error("Tableau Viz Load Error:", e.detail);
+                console.error("❌ Tableau Viz Load Error:", e.detail);
             });
 
             tableauViz.addEventListener("firstInteractive", function() {
-                console.log("Tableau Viz Loaded Successfully!");
+                console.log("✅ Tableau Viz Loaded Successfully!");
             });
 
-            // Debugging: Verify the token is being applied
+            // ✅ Debug: Ensure the token sticks
             setTimeout(() => {
-                console.log("Current Token in DOM:", tableauViz.token);
+                console.log("📌 Current Token in DOM:", tableauViz.getAttribute("token"));
             }, 1000);
         });
     </script>
