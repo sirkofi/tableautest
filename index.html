@@ -1,35 +1,63 @@
-<tableau-viz 
-    id="tableauViz"
-    src="https://10ay.online.tableau.com/t/forsightanalytics-c7b8da01a7/views/EmailPerformancebyCampaign/EmailPerformancebyCampaign"
-    width="100%"
-    height="914"
-    hide-tabs
-    toolbar="bottom"
-    connected-app-id="c4d4592f-bbbb-4a60-b4f5-546f07b29cd0">
-</tableau-viz>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tableau Embedded Dashboard</title>
+    
+    <!-- Load the Latest Tableau Embedding API -->
+    <script type="module" src="https://10ay.online.tableau.com/javascripts/api/tableau.embedding.3.latest.min.js"></script>
+</head>
+<body>
+    <h2>Tableau Embedded Dashboard</h2>
 
-<script>
-document.addEventListener("DOMContentLoaded", function() {
-    const tableauViz = document.getElementById('tableauViz');
+    <!-- Tableau Embedding Component -->
+    <tableau-viz 
+        id="tableauViz"
+        src="https://10ay.online.tableau.com/t/forsightanalytics-c7b8da01a7/views/EmailPerformancebyCampaign/EmailPerformancebyCampaign"
+        width="1200"
+        height="840"
+        hide-tabs
+        toolbar="bottom"
+        connected-app-id="c4d4592f-bbbb-4a60-b4f5-546f07b29cd0">
+    </tableau-viz>
 
-    // ✅ Use the newly generated JWT
-    const token = "eyJhbGciOiJIUzI1NiIsImtpZCI6ImE5MjcwYzg4LWFhMGItNGNmOS1hZGFhLWY3MWZmYTk4NTIyYyIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJjNGQ0NTkyZi1iYmJiLTRhNjAtYjRmNS01NDZmMDdiMjljZDAiLCJleHAiOjE3NDIzNjA3NTksImp0aSI6IjUzNWM5MWNiLTI3ODUtNDljOC1iYjc5LWJhN2RkOTA5NTJhYiIsImF1ZCI6InRhYmxlYXUiLCJzdWIiOiJmb3JzaWdodGFuYWx5dGljc0BnbWFpbC5jb20iLCJzY3AiOlsidGFibGVhdTp2aWV3czplbWJlZCJdfQ.LDJlTlUWxcHW3cU_nf5wXwvVkWgaaL2pEsY-qcJ-5Pk"; 
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            const tableauViz = document.getElementById("tableauViz");
 
-    tableauViz.token = token;  // ✅ Assign JWT dynamically
+            // ✅ Dynamically Inject JWT Token
+            const jwtToken = "eyJhbGciOiJIUzI1NiIsImtpZCI6ImE5MjcwYzg4LWFhMGItNGNmOS1hZGFhLWY3MWZmYTk4NTIyYyIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJjNGQ0NTkyZi1iYmJiLTRhNjAtYjRmNS01NDZmMDdiMjljZDAiLCJleHAiOjE3NDIzNjExNTYsImp0aSI6IjU0ZGYzNzIxLWExYjAtNGRjZi1hMTE4LTA4MzBmNjdlYjQyZCIsImF1ZCI6InRhYmxlYXUiLCJzdWIiOiJmb3JzaWdodGFuYWx5dGljc0BnbWFpbC5jb20iLCJzY3AiOlsidGFibGVhdTp2aWV3czplbWJlZCJdfQ.yEsQ3GNuY_hITOvgqMnwiGdymlCYGTGD2pyuGGLvPNk";  // Replace with valid JWT
+            tableauViz.token = jwtToken;
 
-    console.log("🔑 JWT Assigned:", tableauViz.token);
+            console.log("🎯 JWT Assigned:", tableauViz.token);
 
-    tableauViz.addEventListener("vizLoadError", (e) => {
-        console.error("❌ Tableau Viz Load Error:", e.detail);
-    });
+            // ✅ Event Listener for Errors
+            tableauViz.addEventListener("vizLoadError", (e) => {
+                console.error("❌ Tableau Viz Load Error:", e.detail);
+            });
 
-    tableauViz.addEventListener("firstInteractive", function() {
-        console.log("✅ Tableau Viz Loaded Successfully!");
-    });
+            // ✅ Event Listener for Successful Load
+            tableauViz.addEventListener("firstInteractive", function() {
+                console.log("✅ Tableau Viz Loaded Successfully!");
+            });
 
-    // ✅ Debugging: Verify the token is being applied
-    setTimeout(() => {
-        console.log("🔎 Current Token in DOM:", tableauViz.token);
-    }, 1000);
-});
-</script>
+            // ✅ Verify Token is Set
+            setTimeout(() => {
+                console.log("🔍 Current Token in DOM:", tableauViz.token);
+            }, 2000);
+        });
+    </script>
+
+    <style>
+        iframe {
+            display: block;
+            border: none;
+        }
+        tableau-viz {
+            min-height: 840px;
+            width: 100%;
+        }
+    </style>
+</body>
+</html>
