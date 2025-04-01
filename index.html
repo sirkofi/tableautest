@@ -1,10 +1,61 @@
-<script type='module' src='https://prod-ca-a.online.tableau.com/javascripts/api/tableau.embedding.3.latest.min.js'></script>
-<tableau-viz 
-  id='tableau-viz' 
-  src='https://prod-ca-a.online.tableau.com/t/ttquayeetq-d0b89bc611/views/AccountEngagement/AccountEngagement' 
-  width='1912' 
-  height='914' 
-  hide-tabs 
-  toolbar='bottom'
-  token='eyJhbGciOiJIUzI1NiIsImlzcyI6ImJlMDExZGE5LTcyZjYtNGEyNy05ZjU0LTQzMTJlMzBhN2ZlNiIsImtpZCI6IjI4YzU4NDQ4LWVkYTYtNGNhNy1iYzc0LTA0ZDI5NWNjZTQ1OSIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJiZTAxMWRhOS03MmY2LTRhMjctOWY1NC00MzEyZTMwYTdmZTYiLCJleHAiOjE3NDM1MjI1MDMsImp0aSI6IjIzYWQ5NTNlLWViMGUtNDU4Ni1iMzA5LTE4ZjE3OGE2N2ZiMCIsImF1ZCI6InRhYmxlYXUiLCJzdWIiOiJ0dHF1YXllLmV0cUBnbWFpbC5jb21cdCIsInNjcCI6WyJ0YWJsZWF1OnZpZXdzOmVtYmVkIl19.lRazPeshK3UT7h43CR-RKHCuHCU6Sl2SsVyiLMIlxnY'>
-</tableau-viz>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Tableau JWT Test</title>
+
+  <style>
+    body {
+      font-family: sans-serif;
+      margin: 0;
+      padding: 20px;
+      background-color: #f9f9f9;
+    }
+
+    .dashboard-wrapper {
+      text-align: center;
+      margin-bottom: 100px;
+    }
+
+    .dashboard-wrapper h2 {
+      margin-bottom: 10px;
+    }
+
+    .tableau-container {
+      display: inline-block;
+      width: 100%;
+      max-width: 1000px;
+      aspect-ratio: 16 / 9;
+    }
+
+    tableau-viz {
+      width: 100% !important;
+      height: 100% !important;
+    }
+
+    @media (max-width: 768px) {
+      .tableau-container {
+        max-width: 95%;
+      }
+    }
+  </style>
+
+  <script type="module" src="https://prod-ca-a.online.tableau.com/javascripts/api/tableau.embedding.3.latest.min.js"></script>
+</head>
+<body>
+
+  <div class="dashboard-wrapper"> 
+    <h2>Account Engagement</h2>
+    <div class="tableau-container">
+      <tableau-viz id="tableauViz1"
+        src="https://prod-ca-a.online.tableau.com/t/ttquayeetq-d0b89bc611/views/AccountEngagement/AccountEngagement"
+        token="eyJhbGciOiJIUzI1NiIsImlzcyI6ImJlMDExZGE5LTcyZjYtNGEyNy05ZjU0LTQzMTJlMzBhN2ZlNiIsImtpZCI6IjI4YzU4NDQ4LWVkYTYtNGNhNy1iYzc0LTA0ZDI5NWNjZTQ1OSIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJiZTAxMWRhOS03MmY2LTRhMjctOWY1NC00MzEyZTMwYTdmZTYiLCJleHAiOjE3NDM1MjI3OTYsImp0aSI6IjM4NmQ3Y2RlLTBlYzQtNDY4ZC04NTUxLWE5MTA0Y2ZmOTc5ZiIsImF1ZCI6InRhYmxlYXUiLCJzdWIiOiJ0dHF1YXllLmV0cUBnbWFpbC5jb21cdCIsInNjcCI6WyJ0YWJsZWF1OnZpZXdzOmVtYmVkIl19.an5L3D8j9QYeFZFb1a9q70JEuyb3gA0gH7dI1C7e_9U"
+        toolbar="hidden"
+        hide-tabs>
+      </tableau-viz>
+    </div>
+  </div>
+
+</body>
+</html>
