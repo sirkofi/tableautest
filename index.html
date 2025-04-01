@@ -1,78 +1,10 @@
-<!DOCTYPE html>
-<html>
-<head>
-  <title>Tableau Dashboard</title>
-  <style>
-    body {
-      font-family: Arial, sans-serif;
-      margin: 0;
-      padding: 20px;
-    }
-    .container {
-      max-width: 1200px;
-      margin: 0 auto;
-    }
-    h1 {
-      text-align: center;
-      color: #333;
-    }
-    .tableau-container {
-      width: 100%;
-      height: 800px;
-      border: 1px solid #ddd;
-      margin-top: 20px;
-    }
-    .status {
-      padding: 10px;
-      margin: 10px 0;
-      border-radius: 4px;
-      text-align: center;
-      display: none;
-    }
-    .success {
-      background-color: #e8f5e9;
-      color: #2e7d32;
-    }
-    .error {
-      background-color: #ffebee;
-      color: #c62828;
-    }
-  </style>
-</head>
-<body>
-  <div class="container">
-    <h1>Account Engagement Dashboard</h1>
-    <div id="status" class="status"></div>
-    <div class="tableau-container">
-      <tableau-viz
-        id="tableauViz"
-        src="https://prod-ca-a.online.tableau.com/t/ttquayeetq-d0b89bc611/views/AccountEngagement/AccountEngagement"
-        token="eyJhbGciOiJIUzI1NiIsImlzcyI6ImJlMDExZGE5LTcyZjYtNGEyNy05ZjU0LTQzMTJlMzBhN2ZlNiIsImtpZCI6IjI4YzU4NDQ4LWVkYTYtNGNhNy1iYzc0LTA0ZDI5NWNjZTQ1OSIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJiZTAxMWRhOS03MmY2LTRhMjctOWY1NC00MzEyZTMwYTdmZTYiLCJleHAiOjE3NDM1MjIyMDIsImp0aSI6IjEwZjM3NGEzLTA5ZjktNDA1NC05MzAxLTk1MDdhNGM5YmNiNiIsImF1ZCI6InRhYmxlYXUiLCJzdWIiOiJ0dHF1YXllLmV0cUBnbWFpbC5jb21cdCIsInNjcCI6WyJ0YWJsZWF1OnZpZXdzOmVtYmVkIl19.OYDiCTuM3CyGeBSafqdUveQtjNYJmvTPF5fWURARAAU"
-        toolbar="bottom"
-        hide-tabs>
-      </tableau-viz>
-    </div>
-  </div>
-
-  <script type="module" src="https://prod-ca-a.online.tableau.com/javascripts/api/tableau.embedding.3.latest.min.js"></script>
-  
-  <script>
-    document.addEventListener('DOMContentLoaded', function() {
-      const viz = document.getElementById('tableauViz');
-      const status = document.getElementById('status');
-      
-      viz.addEventListener('firstinteractive', function() {
-        status.textContent = "Dashboard loaded successfully!";
-        status.className = "status success";
-        status.style.display = "block";
-      });
-      
-      viz.addEventListener('authenticationexpired', function() {
-        status.textContent = "Error: Authentication failed. Please check your token.";
-        status.className = "status error";
-        status.style.display = "block";
-      });
-    });
-  </script>
-</body>
-</html>
+<script type='module' src='https://prod-ca-a.online.tableau.com/javascripts/api/tableau.embedding.3.latest.min.js'></script>
+<tableau-viz 
+  id='tableau-viz' 
+  src='https://prod-ca-a.online.tableau.com/t/ttquayeetq-d0b89bc611/views/AccountEngagement/AccountEngagement' 
+  width='1912' 
+  height='914' 
+  hide-tabs 
+  toolbar='bottom'
+  token='eyJhbGciOiJIUzI1NiIsImlzcyI6ImJlMDExZGE5LTcyZjYtNGEyNy05ZjU0LTQzMTJlMzBhN2ZlNiIsImtpZCI6IjI4YzU4NDQ4LWVkYTYtNGNhNy1iYzc0LTA0ZDI5NWNjZTQ1OSIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJiZTAxMWRhOS03MmY2LTRhMjctOWY1NC00MzEyZTMwYTdmZTYiLCJleHAiOjE3NDM1MjE3NTEsImp0aSI6ImI2ZmU3N2FhLTc0MjktNGMyNy04MjAxLWY0NzM4ZTg4NjA4NSIsImF1ZCI6InRhYmxlYXUiLCJzdWIiOiJ0dHF1YXllLmV0cUBnbWFpbC5jb21cdCIsInNjcCI6WyJ0YWJsZWF1OnZpZXdzOmVtYmVkIl19.hwxxL6ZxEr9J6iRo9k3NINLRjKfzmQEl-sK-UOHzK08'>
+</tableau-viz>
