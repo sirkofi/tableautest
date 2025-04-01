@@ -1,5 +1,143 @@
-<tableau-viz id="tableauViz"
-    src="https://prod-ca-a.online.tableau.com/t/ttquayeetq-d0b89bc611/views/AccountEngagement/AccountEngagement"
-    token="eyJhbGciOiJIUzI1NiIsImlzcyI6ImJlMDExZGE5LTcyZjYtNGEyNy05ZjU0LTQzMTJlMzBhN2ZlNiIsImtpZCI6IjI4YzU4NDQ4LWVkYTYtNGNhNy1iYzc0LTA0ZDI5NWNjZTQ1OSIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJiZTAxMWRhOS03MmY2LTRhMjctOWY1NC00MzEyZTMwYTdmZTYiLCJleHAiOjE3NDM1MjE0NDEsImp0aSI6IjhhNDNiOThhLTVjM2YtNDdiMC1hZDEyLWJlMmYzN2U1MzkwYyIsImF1ZCI6InRhYmxlYXUiLCJzdWIiOiJ0dHF1YXllLmV0cUBnbWFpbC5jb21cdCIsInNjcCI6WyJ0YWJsZWF1OnZpZXdzOmVtYmVkIl19.5JC9lmjlE_HHkls9qOQxAydM84tiz2PUrmHeqIv8LrE"
-    onVizLoadError="handleLoadError">
-</tableau-viz>
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Tableau Dashboards</title>
+  <style>
+    .dashboard-wrapper {
+      text-align: center;
+      margin-bottom: 100px;
+    }
+
+    .dashboard-wrapper h2 {
+      margin-bottom: 10px;
+      text-align: center;
+    }
+
+    .tableau-container {
+      display: inline-block;
+      width: 100%;
+      max-width: 1000px;
+      aspect-ratio: 16 / 9;
+    }
+
+    tableau-viz {
+      width: 100% !important;
+      height: 100% !important;
+    }
+
+    @media (max-width: 768px) {
+      .tableau-container {
+        max-width: 95%;
+      }
+    }
+    
+    /* Style for the token input */
+    .token-input-container {
+      margin: 20px auto;
+      max-width: 800px;
+      padding: 15px;
+      background: #f5f5f5;
+      border-radius: 5px;
+    }
+    
+    .token-input-container label {
+      display: block;
+      margin-bottom: 8px;
+      font-weight: bold;
+    }
+    
+    .token-input-container input {
+      width: 100%;
+      padding: 8px;
+      border: 1px solid #ddd;
+      border-radius: 4px;
+      box-sizing: border-box;
+    }
+    
+    .token-input-container button {
+      margin-top: 10px;
+      padding: 8px 15px;
+      background: #4CAF50;
+      color: white;
+      border: none;
+      border-radius: 4px;
+      cursor: pointer;
+    }
+    
+    .token-input-container button:hover {
+      background: #45a049;
+    }
+  </style>
+</head>
+<body>
+  <script type="module" src="https://prod-ca-a.online.tableau.com/javascripts/api/tableau.embedding.3.latest.min.js"></script>
+
+  <!-- Token Input Section with pre-filled token -->
+  <div class="token-input-container">
+    <label for="manualToken">JWT Token for Tableau Dashboards:</label>
+    <input type="text" id="manualToken" value="eyJhbGciOiJIUzI1NiIsImlzcyI6ImJlMDExZGE5LTcyZjYtNGEyNy05ZjU0LTQzMTJlMzBhN2ZlNiIsImtpZCI6IjI4YzU4NDQ4LWVkYTYtNGNhNy1iYzc0LTA0ZDI5NWNjZTQ1OSIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJiZTAxMWRhOS03MmY2LTRhMjctOWY1NC00MzEyZTMwYTdmZTYiLCJleHAiOjE3NDM1MjE3NTEsImp0aSI6ImI2ZmU3N2FhLTc0MjktNGMyNy04MjAxLWY0NzM4ZTg4NjA4NSIsImF1ZCI6InRhYmxlYXUiLCJzdWIiOiJ0dHF1YXllLmV0cUBnbWFpbC5jb21cdCIsInNjcCI6WyJ0YWJsZWF1OnZpZXdzOmVtYmVkIl19.hwxxL6ZxEr9J6iRo9k3NINLRjKfzmQEl-sK-UOHzK08" readonly>
+    <button id="applyToken">Load Dashboards</button>
+  </div>
+
+  <!-- First Tableau Dashboard -->
+  <div class="dashboard-wrapper"> 
+    <h2>Account Engagement</h2>
+    <div class="tableau-container">
+      <tableau-viz id="tableauViz1"
+          src="https://prod-ca-a.online.tableau.com/t/ttquayeetq-d0b89bc611/views/AccountEngagement/AccountEngagement"
+          token=""
+          toolbar="hidden"
+          hide-tabs>
+      </tableau-viz>
+    </div>
+  </div>
+
+  <!-- Second Tableau Dashboard -->
+  <div class="dashboard-wrapper"> 
+    <h2>Email Performance by Campaign</h2>
+    <div class="tableau-container">
+      <tableau-viz id="tableauViz2"
+          src="https://prod-ca-a.online.tableau.com/t/ttquayeetq-d0b89bc611/views/EmailPerformancebyCampaign/EmailPerformancebyCampaign"
+          token=""
+          toolbar="hidden"
+          hide-tabs>
+      </tableau-viz>
+    </div>
+  </div>
+
+  <script>
+    // Function to apply the manual token to all dashboards
+    function applyManualToken() {
+      const manualToken = document.getElementById('manualToken').value.trim();
+      
+      if (!manualToken) {
+        alert("Please enter a JWT token");
+        return;
+      }
+      
+      const dashboardIDs = ["tableauViz1", "tableauViz2"];  
+
+      dashboardIDs.forEach(id => {
+        const viz = document.getElementById(id);
+        if (viz) {
+          viz.token = manualToken;
+          console.log(`Applied token to ${id}`);
+        } else {
+          console.error(`Dashboard with ID ${id} not found.`);
+        }
+      });
+      
+      // Hide the token input after loading
+      document.querySelector('.token-input-container').style.display = 'none';
+    }
+
+    // Set up event listener for the apply token button
+    document.addEventListener("DOMContentLoaded", function() {
+      document.getElementById('applyToken').addEventListener('click', applyManualToken);
+      
+      // Auto-load dashboards when page loads (since we have a token)
+      applyManualToken();
+    });
+  </script>
+</body>
+</html>
