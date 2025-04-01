@@ -2,24 +2,13 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Tableau JWT Test</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <script type="module" src="https://prod-ca-a.online.tableau.com/javascripts/api/tableau.embedding.3.latest.min.js"></script>
 
   <style>
-    body {
-      font-family: sans-serif;
-      margin: 0;
-      padding: 20px;
-      background-color: #f9f9f9;
-    }
-
     .dashboard-wrapper {
       text-align: center;
-      margin-bottom: 100px;
-    }
-
-    .dashboard-wrapper h2 {
-      margin-bottom: 10px;
+      margin-bottom: 30px;
     }
 
     .tableau-container {
@@ -40,17 +29,29 @@
       }
     }
   </style>
-
-  <script type="module" src="https://prod-ca-a.online.tableau.com/javascripts/api/tableau.embedding.3.latest.min.js"></script>
 </head>
 <body>
 
-  <div class="dashboard-wrapper"> 
+  <!-- First Dashboard -->
+  <div class="dashboard-wrapper">
     <h2>Account Engagement</h2>
     <div class="tableau-container">
       <tableau-viz id="tableauViz1"
         src="https://prod-ca-a.online.tableau.com/t/ttquayeetq-d0b89bc611/views/AccountEngagement/AccountEngagement"
-        token="eyJhbGciOiJIUzI1NiIsImlzcyI6ImJlMDExZGE5LTcyZjYtNGEyNy05ZjU0LTQzMTJlMzBhN2ZlNiIsImtpZCI6IjI4YzU4NDQ4LWVkYTYtNGNhNy1iYzc0LTA0ZDI5NWNjZTQ1OSIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJiZTAxMWRhOS03MmY2LTRhMjctOWY1NC00MzEyZTMwYTdmZTYiLCJleHAiOjE3NDM1MjM0MjksImp0aSI6IjRlYmI3ZWUwLTNjZjctNGU3Yy04OWZiLTg0OTM3ZmU2ZDA2YyIsImF1ZCI6InRhYmxlYXUiLCJzdWIiOiJ0dHF1YXllLmV0cUBnbWFpbC5jb20iLCJzY3AiOlsidGFibGVhdTp2aWV3czplbWJlZCJdfQ.hXetncFHzgb8vLB5eJueRSq6UwG8yrpPGMxVpjfXon8"
+        token="eyJhbGciOiJIUzI1NiIsImlzcyI6ImJlMDExZGE5LTcyZjYtNGEyNy05ZjU0LTQzMTJlMzBhN2ZlNiIsImtpZCI6IjI4YzU4NDQ4LWVkYTYtNGNhNy1iYzc0LTA0ZDI5NWNjZTQ1OSIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJiZTAxMWRhOS03MmY2LTRhMjctOWY1NC00MzEyZTMwYTdmZTYiLCJleHAiOjE3NDM1MjM3MjEsImp0aSI6ImM3MWYyNjkxLTVjMDktNDYzNC1iYzRlLWI4MTJjNzhkOTU0YiIsImF1ZCI6InRhYmxlYXUiLCJzdWIiOiJ0dHF1YXllLmV0cUBnbWFpbC5jb20iLCJzY3AiOlsidGFibGVhdTp2aWV3czplbWJlZCJdfQ.7a4j1H2YFIUifYnXI39glKIL_Qn4AySu6vzQtdBgVQo"
+        toolbar="hidden"
+        hide-tabs>
+      </tableau-viz>
+    </div>
+  </div>
+
+  <!-- Second Dashboard -->
+  <div class="dashboard-wrapper">
+    <h2>Email Performance by Campaign</h2>
+    <div class="tableau-container">
+      <tableau-viz id="tableauViz2"
+        src="https://prod-ca-a.online.tableau.com/t/ttquayeetq-d0b89bc611/views/EmailPerformancebyCampaign/EmailPerformancebyCampaign"
+        token="eyJhbGciOiJIUzI1NiIsImlzcyI6ImJlMDExZGE5LTcyZjYtNGEyNy05ZjU0LTQzMTJlMzBhN2ZlNiIsImtpZCI6IjI4YzU4NDQ4LWVkYTYtNGNhNy1iYzc0LTA0ZDI5NWNjZTQ1OSIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJiZTAxMWRhOS03MmY2LTRhMjctOWY1NC00MzEyZTMwYTdmZTYiLCJleHAiOjE3NDM1MjM3MjEsImp0aSI6ImM3MWYyNjkxLTVjMDktNDYzNC1iYzRlLWI4MTJjNzhkOTU0YiIsImF1ZCI6InRhYmxlYXUiLCJzdWIiOiJ0dHF1YXllLmV0cUBnbWFpbC5jb20iLCJzY3AiOlsidGFibGVhdTp2aWV3czplbWJlZCJdfQ.7a4j1H2YFIUifYnXI39glKIL_Qn4AySu6vzQtdBgVQo"
         toolbar="hidden"
         hide-tabs>
       </tableau-viz>
